@@ -4,7 +4,7 @@
  * @author3 Manuel Fuentes Vida
 */
 
-package org.mps.deque;
+package src.test.java.org.mps.deque;
 
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
