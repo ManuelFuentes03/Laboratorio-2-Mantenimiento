@@ -40,18 +40,18 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public T first() {
         // TODO
-        return null;
+        return first.getItem();
     }
 
     @Override
     public T last() {
         // TODO
-        return null;
+        return last.getItem();
     }
 
     @Override
     public int size() {
         // TODO
-        return 0;
+        return size;
     }
 }
