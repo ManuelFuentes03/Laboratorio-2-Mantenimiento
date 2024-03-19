@@ -1,3 +1,9 @@
+/*
+ * @author1 José Antonio Casado Molina
+ * @author2 Clemente Cano Mengíbar
+ * @author3 Manuel Fuentes Vida
+*/
+
 package org.mps.deque;
 
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
@@ -8,6 +14,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     public DoubleLinkedList() {
         // TODO
+        
     }
 
     @Override
