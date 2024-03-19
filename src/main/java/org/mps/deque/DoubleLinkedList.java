@@ -25,7 +25,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if (size==0) {
             first = newNode;
-            last = null;
+            last = newNode;
         } else {
             newNode.setNext(first);
             first.setPrevious(newNode);
@@ -41,12 +41,13 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if(size == 0){
             last = newNode;
-            first = null;
+            first = newNode;
         }else{
             newNode.setPrevious(last);
             last.setNext(newNode);
             last = newNode;
         }
+        size++;
     }
 
     @Override
@@ -60,6 +61,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             first = newNode;
 
         }
+        size--;
     }
 
     @Override
@@ -73,6 +75,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             last = newNode;
 
         }
+        size--;
     }
 
     @Override
@@ -81,7 +84,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if(size == 0){
             throw new DoubleLinkedQueueException("Lista Vacia: no se puede devolver el primero");
         }else{
-            return (T) first;
+            return first.getItem();
         }
     }
 
@@ -91,7 +94,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if(size == 0){
             throw new DoubleLinkedQueueException("Lista Vacia: no se puede devolver el ultimo");
         }else{
-            return (T) last;
+            return last.getItem();
         }
         
     }
