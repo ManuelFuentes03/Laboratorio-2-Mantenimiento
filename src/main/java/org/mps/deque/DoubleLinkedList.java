@@ -53,13 +53,13 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void deleteFirst() {
         // TODO
-        LinkedNode<T> newNode = new LinkedNode<T>(null, null, null);
+        LinkedNode<T> node = new LinkedNode<T>(null, null, null);
         if(size == 0){
             throw new DoubleLinkedQueueException("Lista Vacia: no se puede borrar");
         }else{
-            newNode = first.getNext();
-            first = newNode;
-
+            node = first.getNext();
+            first = node;
+            first.setPrevious(null);
         }
         size--;
     }
@@ -67,13 +67,13 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void deleteLast() {
         // 
-        LinkedNode<T> newNode = new LinkedNode<T>(null, null, null);
+        LinkedNode<T> node = new LinkedNode<T>(null, null, null);
         if(size == 0){
             throw new DoubleLinkedQueueException("Lista Vacia: no se puede borrar");
         }else{
-            newNode = last.getPrevious();
-            last = newNode;
-
+            node = last.getPrevious();
+            last = node;
+            last.setNext(null);
         }
         size--;
     }
