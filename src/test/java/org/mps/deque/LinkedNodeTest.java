@@ -7,17 +7,12 @@
 
 package org.mps.deque;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.beans.Transient;
-
-import javax.management.DescriptorKey;
 
 @DisplayName("Un nodo enlazado")
 public class LinkedNodeTest {
