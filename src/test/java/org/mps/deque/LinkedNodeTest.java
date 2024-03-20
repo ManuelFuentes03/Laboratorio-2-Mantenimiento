@@ -175,8 +175,8 @@ public class LinkedNodeTest {
     class TestIsNodeLinkedNode {
 
         @Test 
-        @DisplayName("Test para comprobar si el nodo de entrada es el primero de la Linked List")
-        void isLinkedNode_FirstNode(){
+        @DisplayName("Test para comprobar si el nodo de entrada es el primero de la Linked List devuelve true")
+        void isFirstNode_withFirstNode_ReturnTrue(){
                 // Arrange
             LinkedNode<Integer> node = new LinkedNode<>(3, null, null);
 
@@ -186,8 +186,24 @@ public class LinkedNodeTest {
         }
 
         @Test 
-        @DisplayName("Test para comprobar si el nodo de entrada es el último de la Linked List")
-        void isLinkedNode_LastNode(){
+        @DisplayName("Test para comprobar si el nodo de entrada no es el primero de la Linked List devuelve falso")
+        void isFirstNode_notFirstNode_ReturnFalse(){
+                // Arrange
+            LinkedNode<Integer> node1 = new LinkedNode<>(3, null, null);
+            LinkedNode<Integer> node2 = new LinkedNode<>(5, node1, null);
+            LinkedNode<Integer> node3 = new LinkedNode<>(10, node2, null);
+            node1.setNext(node2);
+            node2.setNext(node3);
+
+
+                // Act & Assert
+            assertEquals(false, node2.isFirstNode());
+
+        }
+
+        @Test 
+        @DisplayName("Test para comprobar si el nodo de entrada es el último de la Linked List devuelve true")
+        void isLastNode_withLastNode_ReturnTrue(){
                 // Arrange
             LinkedNode<Integer> node = new LinkedNode<>(3, null, null);
 
@@ -197,37 +213,54 @@ public class LinkedNodeTest {
         }
 
         @Test 
-        @DisplayName("Test para comprobar si el nodo de entrada es el último de la Linked List")
-        void isNotLinkedNode_FirstOrLastNode(){
+        @DisplayName("Test para comprobar si el nodo de entrada no es el último de la Linked List devuelve falso")
+        void isLastNode_notLastNode_ReturnFalse(){
                 // Arrange
             LinkedNode<Integer> node1 = new LinkedNode<>(3, null, null);
             LinkedNode<Integer> node2 = new LinkedNode<>(5, node1, null);
             LinkedNode<Integer> node3 = new LinkedNode<>(10, node2, null);
-    
-                // Act
             node1.setNext(node2);
             node2.setNext(node3);
 
+
+                // Act & Assert
+            assertEquals(false, node2.isLastNode());
+
+        }
+
+        @Test 
+        @DisplayName("Cuando no le pasamos un nodo terminal a isNotATerminalNode, nos devuelve true")
+        void isNotATerminalNode_NotFirstOrLastNode_ReturnTrue(){
+                // Arrange
+            LinkedNode<Integer> node1 = new LinkedNode<>(3, null, null);
+            LinkedNode<Integer> node2 = new LinkedNode<>(5, node1, null);
+            LinkedNode<Integer> node3 = new LinkedNode<>(10, node2, null);
+            node1.setNext(node2);
+            node2.setNext(node3);
+                // Act
+            boolean result = node2.isNotATerminalNode();
+
                 // Assert
-            assertEquals(true, node2.isNotATerminalNode());
+            assertEquals(true, result);
     
         }
 
         @Test 
-        @DisplayName("Test para comprobar si el nodo de entrada es el último de la Linked List")
-        void isNotLinkedNode_FirstOrLastNode2(){
+        @DisplayName("Cuando le pasamos un nodo terminal a isNotATerminalNode, nos devuelve false")
+        void isNotATerminalNode_FirstOrLastNode_ReturnFalse(){
                 // Arrange
             LinkedNode<Integer> node1 = new LinkedNode<>(3, null, null);
             LinkedNode<Integer> node2 = new LinkedNode<>(5, node1, null);
             LinkedNode<Integer> node3 = new LinkedNode<>(10, node2, null);
-    
-                // Act
             node1.setNext(node2);
             node2.setNext(node3);
+                // Act
+            boolean result1 = node1.isNotATerminalNode();
+            boolean result2 = node3.isNotATerminalNode();
 
                 // Assert
-            assertEquals(false, node1.isNotATerminalNode());
-            assertEquals(false, node3.isNotATerminalNode());
+            assertEquals(false, result1);
+            assertEquals(false, result2);
     
         }
     }
