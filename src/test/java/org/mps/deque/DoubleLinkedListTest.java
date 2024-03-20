@@ -87,6 +87,33 @@ public class DoubleLinkedListTest {
     }
 
     @Nested
+    @DisplayName("Tests al método deleteFirst")
+    class testDeleteFirst{
+        @Test
+        @DisplayName("Cuando hay elementos, se borra el primer elemento correctamente")
+        void deleteFirst_WithElements_WorksCorrectly(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+
+            list.deleteFirst();
+
+            // Falta comprobar que se elimina el primero
+            assertEquals(2, list.size());
+        }
+
+        @Test
+        @DisplayName("Cuando no hay elementos, se lanza una excepción")
+        void deleteFirst_WithoutElements_ThrowsException(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.deleteFirst());
+        }
+    }
+
+
+    @Nested
     @DisplayName("Tests al método first")
     class testFirst{
         @Test
@@ -104,7 +131,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Cuando la cola no tiene elementos, se lanza una excepción")
-        void first_WithoutElements_ReturnsException(){
+        void first_WithoutElements_ThrowsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             assertThrows(DoubleLinkedQueueException.class, () -> list.first());
@@ -112,26 +139,6 @@ public class DoubleLinkedListTest {
 
     }
    
-    @Nested
-    @DisplayName("Tests al método deleteFirst")
-    class testDeleteFirst{
-        @Test
-        @DisplayName("Cuando hay elementos, se borra el primer elemento correctamente")
-        void deleteFirst_WithElements_WorksCorrectly(){
-            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-            list.append(1);
-            list.append(2);
-            list.append(3);
-            DoubleLinkedList<Integer> listExpected = new DoubleLinkedList<>();
-            list.append(2);
-            list.append(3);
-
-            list.deleteFirst();
-
-            assertEquals(listExpected, list);
-        }
-    }
-
     @Nested
     @DisplayName("Tests al método last")
     class testLast{
@@ -150,7 +157,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Cuando la cola no tiene elementos, se lanza una excepción")
-        void last_WithoutElements_ReturnsException(){
+        void last_WithoutElements_ThrowsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             assertThrows(DoubleLinkedQueueException.class, () -> list.last());
