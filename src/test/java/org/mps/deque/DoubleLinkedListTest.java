@@ -91,12 +91,13 @@ public class DoubleLinkedListTest {
         void deleteFirst_WithElements_WorksCorrectly(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(1);
-            list.append(2);
-            list.append(3);
+            list.append(7);
+            list.append(4);
 
             list.deleteFirst();
 
-            assertEquals(2, list.size());
+            assertEquals(3-1, list.size());
+            assertEquals(7, list.first());
         }
 
         @Test
@@ -116,12 +117,13 @@ public class DoubleLinkedListTest {
         void deleteLast_WithElements_WorksCorrectly(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(1);
-            list.append(2);
-            list.append(3);
+            list.append(7);
+            list.append(6);
 
             list.deleteLast();
 
             assertEquals(2, list.size());
+            assertEquals(7, list.last());
         }
 
         @Test
