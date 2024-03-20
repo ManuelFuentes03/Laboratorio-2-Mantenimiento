@@ -1,10 +1,7 @@
 package org.mps.deque;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import org.checkerframework.checker.units.qual.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,11 +13,11 @@ public class DoubleLinkedListTest {
     class testConstructor{
         @Test
         @DisplayName("Con los parámetros adecuados")
-        void constructorWithGoodParameter(){
+        void constructor_WithGoodParameter__WorksCorrectly(){
             DoubleLinkedList <Integer> list = new DoubleLinkedList<>();
-
-            assertNull(list.first());
-            assertNull(list.last());
+            
+            assertThrows(DoubleLinkedQueueException.class, () -> list.first());
+            assertThrows(DoubleLinkedQueueException.class, () -> list.last());
             assertEquals(0, list.size());
 
         }
@@ -31,7 +28,7 @@ public class DoubleLinkedListTest {
     class testPrepend{
         @Test
         @DisplayName("Comprobamos que añada correctamente 1 al principio")
-        void prependOneElementAtTheBegin() {
+        void prepend_OneElementAtTheBegin_WorksCorrectly() {
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             list.prepend(1);
@@ -43,7 +40,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Comprobamos que añada correctamente 3 nodos al principio")
-        void prependThreeElementAtTheBegin() {
+        void prepend_ThreeElementAtTheBegin_WorksCorrectly() {
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             list.prepend(1);
@@ -61,7 +58,7 @@ public class DoubleLinkedListTest {
     class testAppend{
         @Test
         @DisplayName("Comprobamos que añada correctamente 1 elemento al final")
-        void appendOneElementAtTheEnd() {
+        void append_OneElementAtTheEnd_WorksCorrectly() {
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             list.append(1);
@@ -73,7 +70,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Comprobamos que añada correctamente 3 nodos al final")
-        void appendThreeElementAtTheEnd() {
+        void append_ThreeElementAtTheEnd_WorksCorrectly() {
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             list.append(1);
@@ -99,8 +96,20 @@ public class DoubleLinkedListTest {
 
             list.deleteFirst();
 
-            // Falta comprobar que se elimina el primero
             assertEquals(2, list.size());
+        }
+
+        @Test
+        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
+        void deleteLast_WithElements_CheckOk(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+
+            list.deleteFirst();
+
+            assertEquals(2, list.first());
         }
 
         @Test
@@ -112,6 +121,43 @@ public class DoubleLinkedListTest {
         }
     }
 
+    @Nested
+    @DisplayName("Tests al método deleteLast")
+    class testDeleteLast{
+        @Test
+        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
+        void deleteLast_WithElements_WorksCorrectly(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+
+            list.deleteLast();
+
+            assertEquals(2, list.size());
+        }
+
+        @Test
+        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
+        void deleteLast_WithElements_CheckOk(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+
+            list.deleteLast();
+
+            assertEquals(2, list.last());
+        }
+
+        @Test
+        @DisplayName("Cuando no hay elementos, se lanza una excepción")
+        void deleteLast_WithoutElements_ThrowsException(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.deleteLast());
+        }
+    }
 
     @Nested
     @DisplayName("Tests al método first")
