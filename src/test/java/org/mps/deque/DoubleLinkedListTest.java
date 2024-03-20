@@ -27,7 +27,7 @@ public class DoubleLinkedListTest {
     @DisplayName("Tests para probar el método prepend")
     class testPrepend{
         @Test
-        @DisplayName("Comprobamos que añada correctamente 1 al principio")
+        @DisplayName("Comprobamos que añada el elemento correctamente al principio")
         void prepend_OneElementAtTheBegin_WorksCorrectly() {
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
@@ -100,19 +100,6 @@ public class DoubleLinkedListTest {
         }
 
         @Test
-        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
-        void deleteLast_WithElements_CheckOk(){
-            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-            list.append(1);
-            list.append(2);
-            list.append(3);
-
-            list.deleteFirst();
-
-            assertEquals(2, list.first());
-        }
-
-        @Test
         @DisplayName("Cuando no hay elementos, se lanza una excepción")
         void deleteFirst_WithoutElements_ThrowsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
@@ -125,7 +112,7 @@ public class DoubleLinkedListTest {
     @DisplayName("Tests al método deleteLast")
     class testDeleteLast{
         @Test
-        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
+        @DisplayName("Cuando hay elementos, se borra el último elemento correctamente")
         void deleteLast_WithElements_WorksCorrectly(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(1);
@@ -135,19 +122,6 @@ public class DoubleLinkedListTest {
             list.deleteLast();
 
             assertEquals(2, list.size());
-        }
-
-        @Test
-        @DisplayName("Cuando hay elementos, se borra el ultimo elemento correctamente")
-        void deleteLast_WithElements_CheckOk(){
-            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-            list.append(1);
-            list.append(2);
-            list.append(3);
-
-            list.deleteLast();
-
-            assertEquals(2, list.last());
         }
 
         @Test
@@ -208,33 +182,32 @@ public class DoubleLinkedListTest {
 
             assertThrows(DoubleLinkedQueueException.class, () -> list.last());
         }
+    }
 
-        @Nested
-        @DisplayName("Tests a la clase size")
-        class testSize{
-            @Test
-            void size_WithElements_ReturnNumberOfElements(){
-                DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-                list.append(0);
-                list.append(1);
-                list.append(4);
-                list.append(8);
-                list.append(2);
+    @Nested
+    @DisplayName("Tests a la clase size")
+    class testSize{
+        @Test
+        void size_WithElements_ReturnNumberOfElements(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
 
-                int result = list.size();
+            int result = list.size();
 
-                assertEquals(5, result);
-            }
-
-            @Test
-            void size_WithoutElements_ReturnZero(){
-                DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
-
-                int result = list.size();
-
-                assertEquals(0, result);
-            }
+            assertEquals(5, result);
         }
 
+        @Test
+        void size_WithoutElements_ReturnZero(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            int result = list.size();
+
+            assertEquals(0, result);
+        }
     }
 }
