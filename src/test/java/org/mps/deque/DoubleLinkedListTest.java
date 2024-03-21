@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+
 public class DoubleLinkedListTest {
 
     @Nested
@@ -160,7 +161,7 @@ public class DoubleLinkedListTest {
         }
 
     }
-   
+
     @Nested
     @DisplayName("Tests al método last")
     class testLast{
@@ -187,9 +188,10 @@ public class DoubleLinkedListTest {
     }
 
     @Nested
-    @DisplayName("Tests a la clase size")
+    @DisplayName("Tests al método size")
     class testSize{
         @Test
+        @DisplayName("Cuando la cola tiene elementos, size devuelve el tamaño de la cola")
         void size_WithElements_ReturnNumberOfElements(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(0);
@@ -204,6 +206,7 @@ public class DoubleLinkedListTest {
         }
 
         @Test
+        @DisplayName("Cuando la cola no tiene elementos, size develve cero")
         void size_WithoutElements_ReturnZero(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
@@ -211,5 +214,58 @@ public class DoubleLinkedListTest {
 
             assertEquals(0, result);
         }
+    }
+
+    @Nested
+    @DisplayName("Tests al método get")
+    class testGet {
+
+    }
+
+    @Nested
+    @DisplayName("Tests al método contains")
+    class testContains {
+
+        @Test
+        @DisplayName("Cuando el valor a buscar está en la lista, contains devuelve true")
+        void contains_WithValueInList_ReturnsTrue(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            boolean contains = list.contains(4);
+
+            assertEquals(true, contains);
+
+        }
+
+        @Test
+        @DisplayName("Cuando el valor a buscar no está en la lista, contains devuelve false")
+        void contains_WithoutValueInList_ReturnsFalse(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            boolean contains = list.contains(10);
+
+            assertEquals(false, contains);
+        }
+    }
+
+    @Nested
+    @DisplayName("Tests al método remove")
+    class testRemove {
+
+    }
+    @Nested
+    @DisplayName("Tests al método sort")
+    class testSort {
+
     }
 }
