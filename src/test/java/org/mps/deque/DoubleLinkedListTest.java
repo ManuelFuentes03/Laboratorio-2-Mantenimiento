@@ -212,4 +212,23 @@ public class DoubleLinkedListTest {
             assertEquals(0, result);
         }
     }
+
+    @Nested
+    @DisplayName("Tests al método get")
+    class testGet {
+        @Test
+        @DisplayName("Cuando recibe un index dentro del rango, devuelve el valor del nodo correctamente")
+        void get_WithIndexInRange_ReturnsValue(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            int result = list.get(3);
+
+            assertEquals(8, result);
+        }
+    }
 }

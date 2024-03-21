@@ -109,8 +109,8 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public T get(int index){
-        if(index >= size) {
-            throw new DoubleLinkedQueueException("ERROR: el índice está fuera de rango");
+        if(index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("ERROR: el índice está fuera de rango");
         }
         int i = 0;
         LinkedNode<T> node = first;
@@ -134,17 +134,5 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             }
         }
         return contains;
-    }
-
-    @Override
-    public void remove(T value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
-    }
-
-    @Override
-    public void sort(Comparator<? super T> comparator) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sort'");
     }
 }
