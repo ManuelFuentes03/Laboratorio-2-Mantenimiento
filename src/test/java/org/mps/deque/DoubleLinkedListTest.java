@@ -245,6 +245,17 @@ public class DoubleLinkedListTest {
 
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(4));
         }
+
+        @Test
+        @DisplayName("Cuando recibe un index con valor negativo, lanza una excepción")
+        void get_WithNtegativeIndex_throwsExcepction(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(-2));
+        }
     }
 
     @Nested
