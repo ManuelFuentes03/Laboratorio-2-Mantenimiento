@@ -104,4 +104,19 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         // TODO
         return size;
     }
+
+    @Override
+    public T get(int index){
+        if(index >= size) {
+            throw new DoubleLinkedQueueException("ERROR: el índice está fuera de rango");
+        }
+        int i = 0;
+        LinkedNode<T> node = first;
+        while(i < index) {
+            node = node.getNext();
+            i++;
+        }
+            
+        return node.getItem(); 
+    }
 }
