@@ -135,4 +135,39 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         }
         return contains;
     }
+
+    @Override
+    public void remove(T value){
+        LinkedNode<T> node = first;
+        boolean primera = true;
+        
+        if(contains(value)){
+            if (first.getItem().equals(value)) {
+                deleteFirst();
+            }else{
+                while(node != null && primera){
+                    if(node.getItem().equals(value)){
+                        node.getPrevious().setNext(node.getNext());
+                        node.getNext().setPrevious(node.getPrevious());
+                        primera = false;
+                    }else{
+                        node = first.getNext();
+                    }
+                }
+            }
+
+            size--;
+        }else{
+            throw new DoubleLinkedQueueException("ERROR: el nodo a borrar no esta en la cola");
+        }
+
+        
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sort'");
+    }
+
 }
