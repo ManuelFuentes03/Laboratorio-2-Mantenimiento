@@ -224,7 +224,7 @@ public class DoubleLinkedListTest {
     class testGet {
 
         @Test
-        @DisplayName("Cuando recibe un index dentro del rango, devuelve el valor del nodo correctamente")
+        @DisplayName("Cuando recibe un index que está dentro del rango, devuelve el valor del nodo correctamente")
         void get_WithIndexInRange_ReturnsValue(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(0);
@@ -236,6 +236,28 @@ public class DoubleLinkedListTest {
             int result = list.get(3);
 
             assertEquals(8, result);
+        }
+
+        @Test
+        @DisplayName("Cuando recibe un index que está fuera del rango, lanza una excepción")
+        void get_WithIndexOutOfRange_throwsExcepction(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(4));
+        }
+
+        @Test
+        @DisplayName("Cuando recibe un index con valor negativo, lanza una excepción")
+        void get_WithNtegativeIndex_throwsExcepction(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(-2));
         }
     }
 
