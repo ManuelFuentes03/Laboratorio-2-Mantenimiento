@@ -2,6 +2,9 @@ package org.mps.deque;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Comparator;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -281,6 +284,37 @@ public class DoubleLinkedListTest {
     @DisplayName("Tests al método sort")
     class testSort {
 
+        @Test
+        @DisplayName("Si el tamaño de la lista en uno, devuelve el único nodo")
+        void sort_WithOneElement_ReturnsIt(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+
+            list.sort(Comparator.naturalOrder()); // Comparador para ordenar números enteros de forma ascendente
+
+            assertEquals(1, list.get(0));
+
+        }
+
+        @Test
+        @DisplayName("Ordena la lista correctamente")
+        void sort_WithElements_WorksProperly(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            list.sort(Comparator.naturalOrder()); // Comparador para ordenar números enteros de forma ascendente
+
+            assertEquals(0, list.get(0));
+            assertEquals(1, list.get(1));
+            assertEquals(2, list.get(2));
+            assertEquals(4, list.get(3));
+            assertEquals(8, list.get(4));
+        }
+            
     }
 
 }
