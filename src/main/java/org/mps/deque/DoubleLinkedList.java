@@ -6,6 +6,8 @@
 
 package org.mps.deque;
 
+import java.util.Comparator;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -118,5 +120,31 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         }
             
         return node.getItem(); 
+    }
+
+    @Override
+    public boolean contains(T value) {
+        boolean contains = false;
+
+        for(int i = 0; i < size; i++){
+            if(!contains && first.getItem().equals(value)){
+                contains = true;
+            } else {
+                first = first.getNext();
+            }
+        }
+        return contains;
+    }
+
+    @Override
+    public void remove(T value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sort'");
     }
 }
