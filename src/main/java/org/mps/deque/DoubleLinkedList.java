@@ -138,28 +138,37 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     
     @Override
     public void remove(T value){
-        LinkedNode<T> node = first;
+        LinkedNode<T> node = first.getNext();
+        LinkedNode<T> previous;
+        LinkedNode<T> next;
         boolean primera = true;
         
-        if(contains(value)){
-            if (first.getItem().equals(value)) {
-                deleteFirst();
-            }else{
-                while(node != null && primera){
-                    if(node.getItem().equals(value)){
-                        node.getPrevious().setNext(node.getNext());
-                        node.getNext().setPrevious(node.getPrevious());
-                        primera = false;
-                    }else{
-                        node = first.getNext();
-                    }
-                }
-            }
 
-            size--;
-        }else{
-            throw new DoubleLinkedQueueException("ERROR: el nodo a borrar no esta en la cola");
+        while(node != null && primera){
+            if(first.getItem().equals(value)) {
+                deleteFirst();
+                primera = false;
+
+            }else if(last.getItem().equals(value)) {
+                deleteLast();
+                primera = false;
+
+            }else if(node.getItem().equals(value)){
+                previous = node.getPrevious();
+                next = node.getNext();
+                previous.setNext(next);
+                next.setPrevious(previous);
+                primera = false;
+                size--;
+
+            }else{
+                node = node.getNext();
+            }
         }
+            
+        if(primera){ //no se ha borrado ninguno
+            throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
+        } 
 
         
     }
