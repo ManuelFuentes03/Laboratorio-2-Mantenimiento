@@ -297,10 +297,41 @@ public class DoubleLinkedListTest {
         }
     }
 
-    @Nested
-    @DisplayName("Tests al método remove")
-    class testRemove {
+    @Override
+    public void remove(T value){
+        LinkedNode<T> node = first.getNext();
+        LinkedNode<T> previous;
+        LinkedNode<T> next;
+        boolean primera = true;
+        
 
+        while(node != null && primera){
+            if(first.getItem().equals(value)) {
+                deleteFirst();
+                primera = false;
+
+            }else if(last.getItem().equals(value)) {
+                deleteLast();
+                primera = false;
+
+            }else if(node.getItem().equals(value)){
+                previous = node.getPrevious();
+                next = node.getNext();
+                previous.setNext(next);
+                next.setPrevious(previous);
+                primera = false;
+                size--;
+
+            }else{
+                node = node.getNext();
+            }
+        }
+            
+        if(primera){ //no se ha borrado ninguno
+            throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
+        } 
+
+        
     }
     @Nested
     @DisplayName("Tests al método sort")
