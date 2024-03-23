@@ -1,6 +1,8 @@
 package org.mps.deque;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Comparator;
@@ -297,42 +299,70 @@ public class DoubleLinkedListTest {
         }
     }
 
-    @Override
-    public void remove(T value){
-        LinkedNode<T> node = first.getNext();
-        LinkedNode<T> previous;
-        LinkedNode<T> next;
-        boolean primera = true;
-        
+    @Nested
+    @DisplayName("Tests al método remove")
+    class testRemove {
 
-        while(node != null && primera){
-            if(first.getItem().equals(value)) {
-                deleteFirst();
-                primera = false;
+        @Test
+        @DisplayName("Cuando pasamos un valor contenido en la cola, el elemento debe ser borrado")
+        public void remove_withTheValueInQueue_DeleteTheValue(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
 
-            }else if(last.getItem().equals(value)) {
-                deleteLast();
-                primera = false;
+            list.remove(4);
 
-            }else if(node.getItem().equals(value)){
-                previous = node.getPrevious();
-                next = node.getNext();
-                previous.setNext(next);
-                next.setPrevious(previous);
-                primera = false;
-                size--;
-
-            }else{
-                node = node.getNext();
-            }
+            assertEquals(4, list.size());
+            assertFalse(list.contains(4));
         }
-            
-        if(primera){ //no se ha borrado ninguno
-            throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
-        } 
 
-        
+        @Test
+        @DisplayName("Cuando pasamos un valor que es el primero en la cola, el elemento debe ser borrado")
+        public void remove_whenValueIsTheFirst_DeleteTheValue(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            list.remove(0);
+
+            assertEquals(4, list.size());
+            assertFalse(list.contains(0));
+        }
+
+        @Test
+        @DisplayName("Cuando pasamos un valor que es el último en la cola, el elemento debe ser borrado")
+        public void remove_whenValueIsTheLast_DeleteTheValue(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(8);
+            list.append(2);
+
+            list.remove(2);
+
+            assertEquals(3, list.size());
+            assertFalse(list.contains(2));
+        }
+
+        @Test
+        @DisplayName("Cuando pasamos un valor que no está en la cola, se devuelve una excepción")
+        public void remove_whenValueIsNotInQueue_throwsException(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(8);
+            list.append(2);
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.remove(5));
+        }
     }
+
     @Nested
     @DisplayName("Tests al método sort")
     class testSort {

@@ -141,32 +141,35 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         LinkedNode<T> node = first.getNext();
         LinkedNode<T> previous;
         LinkedNode<T> next;
-        boolean primera = true;
+        boolean borrado = false;
         
+        if(first.getItem().equals(value)) {
+            deleteFirst();
+            borrado = true;
 
-        while(node != null && primera){
-            if(first.getItem().equals(value)) {
-                deleteFirst();
-                primera = false;
-
-            }else if(last.getItem().equals(value)) {
-                deleteLast();
-                primera = false;
-
-            }else if(node.getItem().equals(value)){
-                previous = node.getPrevious();
-                next = node.getNext();
-                previous.setNext(next);
-                next.setPrevious(previous);
-                primera = false;
-                size--;
-
-            }else{
-                node = node.getNext();
+        } else {
+            while(node != null && !borrado){
+                if(node.getItem().equals(value)){
+                    if(node.getNext() == null) { // si es el último
+                        previous = node.getPrevious();
+                        previous.setNext(null);
+                    } else {
+                        previous = node.getPrevious();
+                        next = node.getNext();
+                        previous.setNext(next);
+                        next.setPrevious(previous);
+                    }
+                    node.setNext(null);
+                    node.setPrevious(null);
+                    borrado = true;
+                    size--;
+                } else {
+                    node = node.getNext();
+                }
             }
         }
             
-        if(primera){ //no se ha borrado ninguno
+        if(!borrado){ //no se ha borrado ninguno
             throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
         } 
 
