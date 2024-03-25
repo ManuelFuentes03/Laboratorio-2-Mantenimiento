@@ -133,9 +133,9 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public boolean contains(T value) {
         if(value == null){
-            throw new DoubleLinkedQueueException("ERROR: no se puede añadir un valor null");
+            throw new DoubleLinkedQueueException("ERROR: no se puede comprobar que en la lista haya un valor null");
         }
-        
+
         boolean contains = false;
 
         for(int i = 0; i < size; i++){
