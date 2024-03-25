@@ -150,6 +150,11 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     
     @Override
     public void remove(T value){
+        if(value == null) {
+            throw new DoubleLinkedQueueException("ERROR: no se puede borrar un valor null");
+
+        }
+        
         LinkedNode<T> node = first.getNext();
         LinkedNode<T> previous;
         LinkedNode<T> next;
@@ -184,8 +189,6 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if(!borrado){ //no se ha borrado ninguno
             throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
         } 
-
-        
     }
 
     

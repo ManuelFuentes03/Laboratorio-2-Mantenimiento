@@ -386,6 +386,18 @@ public class DoubleLinkedListTest {
 
             assertThrows(DoubleLinkedQueueException.class, () -> list.remove(5));
         }
+
+        @Test
+        @DisplayName("Cuando pasamos un valor que no está en la cola, se devuelve una excepción")
+        public void remove_whenValueIsNull_throwsException(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(8);
+            list.append(2);
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.remove(null));
+        }
     }
 
     @Nested
