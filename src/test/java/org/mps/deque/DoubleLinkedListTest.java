@@ -283,6 +283,16 @@ public class DoubleLinkedListTest {
     class testContains {
 
         @Test
+        @DisplayName("Cuando el valor a buscar sea null, se debe lanzar la excepcion correcta")
+        void contains_NullInList_ThrowsException(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.contains(null));
+        }
+
+        @Test
         @DisplayName("Cuando el valor a buscar está en la lista, contains devuelve true")
         void contains_WithValueInList_ReturnsTrue(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
