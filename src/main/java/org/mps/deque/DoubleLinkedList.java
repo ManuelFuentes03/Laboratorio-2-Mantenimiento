@@ -24,6 +24,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void prepend(T value) {
         // TODO
+        if(value == null){
+            throw new DoubleLinkedQueueException("ERROR: no se puede añadir un valor null");
+        }
+
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if (size==0) {
             first = newNode;
@@ -40,6 +44,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void append(T value) {
         // TODO
+        if(value == null){
+            throw new DoubleLinkedQueueException("ERROR: no se puede añadir un valor null");
+        }
+
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if(size == 0){
             last = newNode;

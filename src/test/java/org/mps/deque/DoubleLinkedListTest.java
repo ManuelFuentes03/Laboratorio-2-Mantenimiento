@@ -57,6 +57,14 @@ public class DoubleLinkedListTest {
             assertEquals(3, list.first());
             assertEquals(1, list.last());
         }
+
+        @Test
+        @DisplayName("Al intentar añadir un elemento null al principio nos debe lanzar una excepción")
+        void prepend_withValueNull_throwsException() {
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.prepend(null));
+        }
     }
 
     @Nested
@@ -86,6 +94,14 @@ public class DoubleLinkedListTest {
             assertEquals(3, list.size());
             assertEquals(1, list.first());
             assertEquals(3, list.last());
+        }
+
+        @Test
+        @DisplayName("Al intentar añadir un elemento null al final nos debe lanzar una excepción")
+        void append_withValueNull_throwsException() {
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.append(null));
         }
     }
 
