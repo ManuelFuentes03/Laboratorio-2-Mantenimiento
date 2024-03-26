@@ -434,6 +434,27 @@ public class DoubleLinkedListTest {
             assertEquals(4, list.get(3));
             assertEquals(8, list.get(4));
         }
+
+        @Test
+        @DisplayName("Lanza exception si el comparador es null")
+        void sort_WithComparatorNull_WorksProperly(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+            list.append(0);
+            list.append(1);
+            list.append(4);
+            list.append(8);
+            list.append(2);
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.sort(null));
+        }
+
+        @Test
+        @DisplayName("Lanza excepcion si la lista está vacía")
+        void sort_WithoutElements_WorksProperly(){
+            DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+            assertThrows(DoubleLinkedQueueException.class, () -> list.sort(Comparator.naturalOrder()));
+        }
             
     }
 

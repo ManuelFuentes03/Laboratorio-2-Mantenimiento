@@ -194,8 +194,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     
     @Override
     public void sort(Comparator<? super T> comparator) {
-        if (size <= 1) {
+        if (size ==1) {
             return;
+        }else if(comparator == null || size == 0){
+            throw new DoubleLinkedQueueException ("ERROR: parámetro negativo o lista vacia");
         }
     
         LinkedNode<T> current = first;
