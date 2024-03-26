@@ -384,11 +384,12 @@ public class DoubleLinkedListTest {
             list.append(8);
             list.append(2);
 
+            assertEquals(4, list.size());
             assertThrows(DoubleLinkedQueueException.class, () -> list.remove(5));
         }
 
         @Test
-        @DisplayName("Cuando pasamos un valor que no está en la cola, se devuelve una excepción")
+        @DisplayName("Cuando pasamos como parámetro un null, se devuelve una excepción")
         public void remove_whenValueIsNull_throwsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(0);
@@ -406,7 +407,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Si el tamaño de la lista en uno, devuelve el único nodo")
-        void sort_WithOneElement_ReturnsIt(){
+        void sort_WithOneElement_WorksProperly(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(1);
 
@@ -437,7 +438,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Lanza exception si el comparador es null")
-        void sort_WithComparatorNull_WorksProperly(){
+        void sort_WithComparatorNull_ThrowsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
             list.append(0);
             list.append(1);
@@ -450,7 +451,7 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Lanza excepcion si la lista está vacía")
-        void sort_WithoutElements_WorksProperly(){
+        void sort_WithoutElements_ThrowsException(){
             DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
             assertThrows(DoubleLinkedQueueException.class, () -> list.sort(Comparator.naturalOrder()));
