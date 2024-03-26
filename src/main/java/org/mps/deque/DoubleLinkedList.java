@@ -137,12 +137,14 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         }
 
         boolean contains = false;
-
-        for(int i = 0; i < size; i++){
-            if(!contains && first.getItem().equals(value)){
+        int i = 0;
+        LinkedNode<T> node = first;
+        while(i < size && !contains){
+            if(!contains && node.getItem().equals(value)){
                 contains = true;
             } else {
-                first = first.getNext();
+                i++;
+                node = node.getNext();
             }
         }
         return contains;
