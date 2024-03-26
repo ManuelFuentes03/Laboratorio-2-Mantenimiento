@@ -194,30 +194,32 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     
     @Override
     public void sort(Comparator<? super T> comparator) {
-        if (size ==1) {
+        if (size == 1) {
             return;
         }else if(comparator == null || size == 0){
-            throw new DoubleLinkedQueueException ("ERROR: parámetro negativo o lista vacia");
+            throw new DoubleLinkedQueueException ("ERROR: parámetro null o lista vacia");
         }
     
         LinkedNode<T> current = first;
     
-        while (current != null) {
-            LinkedNode<T> minNode = current;
-            LinkedNode<T> innerCurrent = current.getNext();
-    
-            while (innerCurrent != null) {
-                if (comparator.compare(innerCurrent.getItem(), minNode.getItem()) < 0) {
-                    minNode = innerCurrent;
+        if(size > 1){
+            while (current != null) {
+                LinkedNode<T> minNode = current;
+                LinkedNode<T> innerCurrent = current.getNext();
+        
+                while (innerCurrent != null) {
+                    if (comparator.compare(innerCurrent.getItem(), minNode.getItem()) < 0) {
+                        minNode = innerCurrent;
+                    }
+                    innerCurrent = innerCurrent.getNext();
                 }
-                innerCurrent = innerCurrent.getNext();
+        
+                T temp = current.getItem();
+                current.setItem(minNode.getItem());
+                minNode.setItem(temp);
+        
+                current = current.getNext();
             }
-    
-            T temp = current.getItem();
-            current.setItem(minNode.getItem());
-            minNode.setItem(temp);
-    
-            current = current.getNext();
         }
     }
 }
