@@ -140,7 +140,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         int i = 0;
         LinkedNode<T> node = first;
         while(i < size && !contains){
-            if(!contains && node.getItem().equals(value)){
+            if(node.getItem().equals(value)){
                 contains = true;
             } else {
                 i++;
