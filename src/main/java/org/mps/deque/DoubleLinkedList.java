@@ -6,6 +6,8 @@
 
 package org.mps.deque;
 
+import java.util.Comparator;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -22,6 +24,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void prepend(T value) {
         // TODO
+        if(value == null){
+            throw new DoubleLinkedQueueException("ERROR: no se puede añadir un valor null");
+        }
+
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if (size==0) {
             first = newNode;
@@ -38,6 +44,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public void append(T value) {
         // TODO
+        if(value == null){
+            throw new DoubleLinkedQueueException("ERROR: no se puede añadir un valor null");
+        }
+
         LinkedNode<T> newNode = new LinkedNode<T>(value, null, null);
         if(size == 0){
             last = newNode;
@@ -103,5 +113,113 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     public int size() {
         // TODO
         return size;
+    }
+
+    @Override
+    public T get(int index){
+        if(index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("ERROR: el índice está fuera de rango");
+        }
+        int i = 0;
+        LinkedNode<T> node = first;
+        while(i < index) {
+            node = node.getNext();
+            i++;
+        }
+            
+        return node.getItem(); 
+    }
+
+    @Override
+    public boolean contains(T value) {
+        if(value == null){
+            throw new DoubleLinkedQueueException("ERROR: no se puede comprobar que en la lista haya un valor null");
+        }
+
+        boolean contains = false;
+        int i = 0;
+        LinkedNode<T> node = first;
+        while(i < size && !contains){
+            if(node.getItem().equals(value)){
+                contains = true;
+            } else {
+                i++;
+                node = node.getNext();
+            }
+        }
+        return contains;
+    }
+    
+    @Override
+    public void remove(T value){
+        if(value == null) {
+            throw new DoubleLinkedQueueException("ERROR: no se puede borrar un valor null");
+
+        }
+        
+        LinkedNode<T> node = first.getNext();
+        LinkedNode<T> previous;
+        LinkedNode<T> next;
+        boolean borrado = false;
+        
+        if(first.getItem().equals(value)) {
+            deleteFirst();
+            borrado = true;
+
+        } else {
+            while(node != null && !borrado){
+                if(node.getItem().equals(value)){
+                    if(node.getNext() == null) { // si es el último
+                        previous = node.getPrevious();
+                        previous.setNext(null);
+                    } else {
+                        previous = node.getPrevious();
+                        next = node.getNext();
+                        previous.setNext(next);
+                        next.setPrevious(previous);
+                    }
+                    node.setNext(null);
+                    node.setPrevious(null);
+                    borrado = true;
+                    size--;
+                } else {
+                    node = node.getNext();
+                }
+            }
+        }
+            
+        if(!borrado){ //no se ha borrado ninguno
+            throw new DoubleLinkedQueueException ("ERROR: el elemento que quieres borrar no está en la lista");
+        } 
+    }
+
+    
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        if(comparator == null || size == 0){
+            throw new DoubleLinkedQueueException ("ERROR: parámetro null o lista vacia");
+        }
+    
+        LinkedNode<T> current = first;
+    
+        if(size > 1){
+            while (current != null) {
+                LinkedNode<T> minNode = current;
+                LinkedNode<T> innerCurrent = current.getNext();
+        
+                while (innerCurrent != null) {
+                    if (comparator.compare(innerCurrent.getItem(), minNode.getItem()) < 0) {
+                        minNode = innerCurrent;
+                    }
+                    innerCurrent = innerCurrent.getNext();
+                }
+        
+                T temp = current.getItem();
+                current.setItem(minNode.getItem());
+                minNode.setItem(temp);
+        
+                current = current.getNext();
+            }
+        }
     }
 }
